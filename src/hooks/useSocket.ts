@@ -1,18 +1,19 @@
-// src/hooks/useSocket.ts
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
-const useSocket = (url: string): Socket | null => {
+const SERVER_URL = import.meta.env.PUBLIC_SERVER_URL || "http://localhost:4000";
+
+const useSocket = (): Socket | null => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const newSocket = io(url);
+    const newSocket = io(SERVER_URL);
     setSocket(newSocket);
 
     return () => {
       newSocket.disconnect();
     };
-  }, [url]);
+  }, [SERVER_URL]);
 
   return socket;
 };
