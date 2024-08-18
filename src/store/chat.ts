@@ -9,12 +9,14 @@ export interface Chat {
 
 type ChatState = {
   chat: Chat;
+  onlineCount: number;
   showChat: boolean;
 };
 
 type ChatActions = {
   setShowChat: (show: boolean) => void;
   setMessages: (messages: Message[]) => void;
+  setOnlineCount: (count: number) => void;
   reset: () => void;
 };
 
@@ -24,6 +26,7 @@ const initialState: ChatState = {
   chat: {
     messages: [],
   },
+  onlineCount: 0,
   showChat: true,
 };
 
@@ -34,6 +37,7 @@ export const useChatStore = create(
         ...initialState,
         setShowChat: (show) => set({ showChat: show }),
         setMessages: (messages) => set({ chat: { messages } }),
+        setOnlineCount: (count) => set({ onlineCount: count }),
         reset: () => set({ ...initialState }),
       })),
       {

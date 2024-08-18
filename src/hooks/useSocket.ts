@@ -1,3 +1,4 @@
+import { useChatStore } from "@/store/chat";
 import { useUserStore } from "@/store/user";
 import socketEvents from "@shared/socketEvents";
 import { useEffect } from "react";
@@ -9,6 +10,7 @@ let socket: Socket | null = null;
 
 const useSocket = (): Socket | null => {
   const { user, register } = useUserStore();
+  const { setOnlineCount } = useChatStore();
 
   useEffect(() => {
     if (!socket) {
@@ -18,6 +20,11 @@ const useSocket = (): Socket | null => {
 
       socket.on(socketEvents.REGISTER, (userId: string) => {
         register(userId);
+      });
+
+      socket.on(socketEvents.ONLINE_COUNT, (count: number) => {
+        console.log({ count });
+        setOnlineCount(count);
       });
     } else {
       if (socket.connected === false) {

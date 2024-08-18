@@ -1,4 +1,5 @@
 import useSocket from "@/hooks/useSocket";
+import { useChatStore } from "@/store/chat";
 
 interface ChatHeaderProps {
   closeChat: () => void;
@@ -6,6 +7,7 @@ interface ChatHeaderProps {
 
 export default function ChatHeader({ closeChat }: ChatHeaderProps) {
   const socket = useSocket();
+  const { onlineCount } = useChatStore();
 
   return (
     <div className="flex items-center rounded-t-3xl bg-gray-50 p-4">
@@ -22,6 +24,8 @@ export default function ChatHeader({ closeChat }: ChatHeaderProps) {
       <h1 className="text-sm font-semibold leading-6 text-gray-900">
         Real-Time Chat
       </h1>
+      <span className="mx-2">&bull;</span>
+      <span className="text-gray-500">{onlineCount} online</span>
       <button onClick={closeChat} className="ml-auto size-max">
         <i className="bi bi-x-lg text-gray-900" />
       </button>
