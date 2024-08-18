@@ -1,0 +1,33 @@
+{
+  "name": "real-time-chat-server",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "Jorge Mitri <mitri.dvp@gmail.com> (https://www.mitri-dvp.com/)",
+  "license": "MIT",
+  "description": "",
+  "imports": {
+    "@shared/*": "../shared/*"
+  },
+  "_moduleAliases": {
+    "@shared": "../shared"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.4.0",
+    "@types/socket.io": "^3.0.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "module-alias": "^2.2.3",
+    "nodemon": "^3.1.4",
+    "socket.io": "^4.7.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/uuid": "^10.0.0"
+  }
+}
