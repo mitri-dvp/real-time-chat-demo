@@ -1,17 +1,34 @@
-import { useEffect, useState } from "react";
+import { useUserStore } from "@/store/user";
+import socketEvents from "@shared/socketEvents";
+import { useEffect } from "react";
 import { io, Socket } from "socket.io-client";
 
 const SERVER_URL = import.meta.env.PUBLIC_SERVER_URL || "http://localhost:4000";
 
+let socket: Socket | null = null;
+
 const useSocket = (): Socket | null => {
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const { user, register } = useUserStore();
 
   useEffect(() => {
-    const newSocket = io(SERVER_URL);
-    setSocket(newSocket);
+    if (!socket) {
+      socket = io(SERVER_URL, {
+        query: { userId: user ? user.id : "" },
+      });
+
+      socket.on(socketEvents.REGISTER, (userId: string) => {
+        register(userId);
+      });
+    } else {
+      if (socket.connected === false) {
+        socket.connect();
+      }
+    }
 
     return () => {
-      newSocket.disconnect();
+      if (socket) {
+        socket.disconnect();
+      }
     };
   }, []);
 

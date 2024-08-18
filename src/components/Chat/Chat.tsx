@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 
 import useSocket from "@/hooks/useSocket";
-import { Message, useChatStore } from "@/store/chat";
+
+import { useChatStore } from "@/store/chat";
 import ChatHeader from "./ChatHeader";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
+
+import type { Message } from "@shared/types";
+import socketEvents from "@shared/socketEvents";
 
 export default function Chat() {
   const socket = useSocket();
@@ -14,17 +18,17 @@ export default function Chat() {
 
   useEffect(() => {
     if (socket) {
-      socket.on("receive_message", (message: Message) => {
+      socket.on(socketEvents.RECEIVE_MESSAGE, (message: Message) => {
         setMessages([...chat.messages, message]);
       });
     }
 
     return () => {
       if (socket) {
-        socket.off("receive_message");
+        socket.off(socketEvents.RECEIVE_MESSAGE);
       }
     };
-  }, [socket, setMessages, chat.messages]);
+  }, [socket, chat.messages]);
 
   const closeChat = () => {
     setIsClosing(true);

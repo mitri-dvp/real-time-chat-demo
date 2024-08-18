@@ -1,11 +1,7 @@
 import { create } from "zustand";
 import { createJSONStorage, persist, devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-
-export interface Message {
-  message: string;
-  timestamp: number;
-}
+import type { Message } from "@shared/types";
 
 export interface Chat {
   messages: Message[];

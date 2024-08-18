@@ -1,5 +1,8 @@
-import useSocket from "@/hooks/useSocket";
 import { useForm } from "react-hook-form";
+
+import useSocket from "@/hooks/useSocket";
+
+import socketEvents from "@shared/socketEvents";
 
 export default function ChatFooter() {
   const socket = useSocket();
@@ -12,7 +15,7 @@ export default function ChatFooter() {
 
   const sendMessage = form.handleSubmit((data) => {
     if (data.message.trim() && socket) {
-      socket.emit("send_message", { message: data.message });
+      socket.emit(socketEvents.SEND_MESSAGE, { message: data.message });
       form.setValue("message", "");
     }
   });
@@ -27,9 +30,10 @@ export default function ChatFooter() {
         type="text"
         className="flex-1 rounded-3xl p-4 outline-none"
         placeholder="Type a message"
+        autoFocus
       />
       <button
-        onClick={sendMessage}
+        type="submit"
         className="ml-auto mr-0 h-auto w-12 self-stretch rounded-3xl"
       >
         <i
