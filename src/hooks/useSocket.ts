@@ -13,7 +13,7 @@ const useSocket = (): Socket | null => {
     return () => {
       newSocket.disconnect();
     };
-  }, [SERVER_URL]);
+  }, []);
 
   return socket;
 };
