@@ -7,7 +7,9 @@ interface ChatHeaderProps {
 
 export default function ChatHeader({ closeChat }: ChatHeaderProps) {
   const socket = useSocket();
-  const { onlineCount } = useChatStore();
+  const { onlineCount, setMessages } = useChatStore();
+
+  const clearChat = () => setMessages([]);
 
   return (
     <div className="flex items-center rounded-t-3xl bg-gray-50 p-4">
@@ -26,8 +28,14 @@ export default function ChatHeader({ closeChat }: ChatHeaderProps) {
       </h1>
       <span className="mx-2">&bull;</span>
       <span className="text-gray-500">{onlineCount} online</span>
-      <button onClick={closeChat} className="ml-auto size-max">
-        <i className="bi bi-x-lg text-gray-900" />
+      <button
+        onClick={clearChat}
+        className="ml-auto size-max text-gray-900 transition-all hover:text-red-500"
+      >
+        <i className="bi bi-trash3-fill" />
+      </button>
+      <button onClick={closeChat} className="ml-4 size-max text-gray-900">
+        <i className="bi bi-x-lg" />
       </button>
     </div>
   );
