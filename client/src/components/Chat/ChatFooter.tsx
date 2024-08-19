@@ -30,6 +30,7 @@ export default function ChatFooter() {
         type="text"
         className="flex-1 rounded-3xl p-4 outline-none"
         placeholder="Type a message"
+        autoComplete="off"
         autoFocus
       />
       <button
