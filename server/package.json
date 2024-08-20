@@ -2,7 +2,8 @@
   "name": "real-time-chat-server",
   "version": "1.0.0",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/server/src/server.js",
     "dev": "nodemon"
   },
   "keywords": [],
@@ -25,6 +26,7 @@
     "nodemon": "^3.1.4",
     "socket.io": "^4.7.5",
     "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.10",
     "typescript": "^5.5.4",
     "uuid": "^10.0.0"
   },
