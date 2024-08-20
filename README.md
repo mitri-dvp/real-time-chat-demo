@@ -2,6 +2,8 @@
 
 This monorepo contains the code for a Real-Time Chat Application, consisting of a Client using React.js, a Server written in Node.js, and a Shared folder for common utilities and types.
 
+![Real-Time Chat Demo](./preview.gif)
+
 ## Project Structure
 
 ```
